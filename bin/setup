@@ -1,0 +1,4 @@
+rake db:create
+rake db:migrate
+rake import_file -- -f "./tmp/pipes.txt"
+rake import_file -- -f "./tmp/commas.txt"

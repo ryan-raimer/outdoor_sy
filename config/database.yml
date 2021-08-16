@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: postgres
+  password: password
+  host: <%= ENV["CONTAINERIZED"] ? "db" : "localhost" %>
+
+development:
+  <<: *default
+  database: outdoor_sy_development
+
+test:
+  <<: *default
+  database: outdoor_sy_test
+
+production:
+  <<: *default
+  database: outdoor_sy_production
+  username: outdoor_sy
+  password: <%= ENV['OUTDOOR_SY2_DATABASE_PASSWORD'] %>

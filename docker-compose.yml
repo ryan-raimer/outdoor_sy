@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    image: ryanraimer/outdoor_sy:latest
+    command: puma
+    volumes:
+      - .:/outdoor_sy
+    ports:
+      - "3000:3000"
+    environment:
+      CONTAINERIZED: "true"
+    depends_on:
+      - db
